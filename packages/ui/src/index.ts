@@ -31,7 +31,7 @@ export { DeviceSettingsPane, NavbarSettings } from './components/navbar/NavbarSe
 export type { DeviceSettingsPaneProps, LocaleOption, NavbarSettingsProps } from './components/navbar/NavbarSettings';
 export { BellIcon, ChevronDownIcon, PawIcon, SlidersIcon } from './components/navbar/icons';
 export type { DeviceSettings, NavApp, NavNotification, NavUser } from './components/navbar/types';
-export { compose, cva, cx } from './styles/cva';
+export { cva, cx } from './styles/cva';
 export type { VariantProps } from './styles/cva';
 export { focusRing } from './styles/focus-ring';
 
