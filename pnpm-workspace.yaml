@@ -1,0 +1,15 @@
+packages:
+  - packages/*
+  - apps/*
+
+# pnpm 11 supply-chain guard: off while the stack is young and we track fresh releases;
+# consider raising (e.g. 1440 = 1 day) once dependencies stabilize
+minimumReleaseAge: 0
+
+peerDependencyRules:
+  ignoreMissing:
+    - svelte
+
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true

@@ -1,0 +1,29 @@
+{
+	"name": "woofing-ui-monorepo",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "turbo run build",
+		"lint": "oxlint --type-aware",
+		"fmt": "oxfmt",
+		"fmt:check": "oxfmt --check",
+		"storybook": "pnpm --filter @woofing/ui storybook",
+		"gallery": "pnpm --filter gallery dev"
+	},
+	"devDependencies": {
+		"eslint-config-neon": "^0.5.4",
+		"oxfmt": "^0.61.0",
+		"oxlint": "^1.76.0",
+		"oxlint-tsgolint": "^7.0.2001",
+		"turbo": "^2.10.8",
+		"typescript": "^5.9.3"
+	},
+	"engines": {
+		"node": ">=24"
+	},
+	"volta": {
+		"node": "24.18.1",
+		"pnpm": "11.18.0"
+	},
+	"packageManager": "pnpm@11.18.0"
+}

@@ -1,0 +1,75 @@
+/*
+ * woof.ing design tokens — ported from meta/design/shared.css (source of truth for values).
+ * Plain CSS custom properties, no Tailwind dependency: this file is copy-pasteable into
+ * design mocks (Claude Design) the same way shared.css was.
+ *
+ * Themes switch via data-theme on <html> (or any container): dark (default) / light / black.
+ * Apps pick their accent via data-accent, or by setting --accent on any scope.
+ * Knobs (--ink-mix, --nav-tint, --pill-mix, --pill-base) stay plain numbers/colors so scoped
+ * --accent overrides keep working; anything derived from --accent must be computed at the use site.
+ */
+
+:root {
+	/* app accent palette */
+	--accent-community: #a78bfa;
+	--accent-art-corner: #e85fc7;
+	--accent-blog: #ffae38;
+	--accent-support: #2fd1a8;
+	--accent-moderation: #6e5fb0;
+
+	--accent: var(--accent-community);
+	/* ink for text/icons sitting on an accent or danger fill */
+	--on-accent: #221a10;
+}
+
+:root,
+[data-theme='dark'] {
+	--bg: #110e15;
+	--surface: #1a1622;
+	--surface-2: #241d2e;
+	--line: rgba(242, 237, 231, 0.09);
+	--text: #f2ede7;
+	--muted: #a89db4;
+	--danger: #f16a6a;
+	--ink-mix: 100%; /* accent share of accent-ink; lowered on light so accent text darkens toward --text */
+	--nav-tint: 26%; /* accent share in the navbar glass */
+	--pill-mix: 14%; /* app-pill chip */
+	--pill-base: transparent;
+}
+
+[data-theme='black'] {
+	--bg: #000000;
+	--surface: #0f0c13;
+	--surface-2: #1a1620;
+	--line: rgba(242, 237, 231, 0.12);
+}
+
+[data-theme='light'] {
+	--bg: #f2eef3;
+	--surface: #fbf9fc;
+	--surface-2: #e8e3ec;
+	--line: rgba(42, 36, 48, 0.14);
+	--text: #241e2b;
+	--muted: #6b6176;
+	--danger: #c73a3f;
+	--ink-mix: 55%;
+	--nav-tint: 55%;
+	--pill-mix: 16%;
+	--pill-base: rgba(255, 255, 255, 0.85);
+}
+
+[data-accent='community'] {
+	--accent: var(--accent-community);
+}
+[data-accent='art-corner'] {
+	--accent: var(--accent-art-corner);
+}
+[data-accent='blog'] {
+	--accent: var(--accent-blog);
+}
+[data-accent='support'] {
+	--accent: var(--accent-support);
+}
+[data-accent='moderation'] {
+	--accent: var(--accent-moderation);
+}

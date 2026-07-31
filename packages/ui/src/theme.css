@@ -1,0 +1,49 @@
+/*
+ * woof.ing Tailwind v4 theme. Consumers:
+ *
+ *   @import 'tailwindcss';
+ *   @import '@woofing/ui/theme.css';
+ *   @source '../node_modules/@woofing/ui';
+ */
+
+@import './tokens.css';
+@import 'tw-animate-css';
+@plugin 'tailwindcss-react-aria-components';
+
+@theme {
+	--font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-rounded: ui-rounded, 'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui;
+}
+
+/* inline: utilities receive the expression itself, so it resolves against the nearest
+   scoped --accent/--ink-mix — accent-ink must never be frozen at :root (see tokens.css) */
+@theme inline {
+	--color-bg: var(--bg);
+	--color-surface: var(--surface);
+	--color-surface-2: var(--surface-2);
+	--color-line: var(--line);
+	--color-text: var(--text);
+	--color-muted: var(--muted);
+	--color-accent: var(--accent);
+	--color-accent-ink: color-mix(in srgb, var(--accent) var(--ink-mix), var(--text));
+	--color-on-accent: var(--on-accent);
+	--color-danger: var(--danger);
+	/* navbar glass + app-pill chip (see meta/design/shared.css .nav / .app-pill) */
+	--color-nav: color-mix(in srgb, color-mix(in srgb, var(--accent) var(--nav-tint), var(--bg)) 84%, transparent);
+	--color-nav-line: color-mix(in srgb, var(--accent) 22%, var(--line));
+	--color-pill: color-mix(in srgb, var(--accent) var(--pill-mix), var(--pill-base));
+	--color-pill-ink: color-mix(in srgb, var(--accent) 65%, var(--text));
+}
+
+/* safe-area helpers (notch / home indicator). Additive paddings — put them on a bar or
+   wrapper, keep normal px/py on the element inside. Requires viewport-fit=cover. */
+@utility pt-safe {
+	padding-top: env(safe-area-inset-top, 0px);
+}
+@utility pb-safe {
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility px-safe {
+	padding-left: env(safe-area-inset-left, 0px);
+	padding-right: env(safe-area-inset-right, 0px);
+}
