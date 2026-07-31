@@ -8,6 +8,11 @@ import { defineConfig } from 'oxlint';
 
 export default defineConfig({
 	extends: [common, browser, react, jsxA11y, typescript, prettier],
+	plugins: ['import'],
+	rules: {
+		// published ESM + NodeNext consumers need extensionful relative specifiers
+		'import/extensions': ['error', 'ignorePackages'],
+	},
 	ignorePatterns: ['**/dist/**', '**/storybook-static/**', '**/node_modules/**'],
 	options: {
 		typeAware: true,

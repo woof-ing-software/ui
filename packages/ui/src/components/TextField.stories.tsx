@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Button } from './Button';
-import { TextField } from './TextField';
+import { Button } from './Button.js';
+import { TextField } from './TextField.js';
 
 const meta = {
 	title: 'Components/TextField',

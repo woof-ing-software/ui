@@ -1,6 +1,6 @@
 /* Fake data for Storybook / gallery demos only — not exported from the package. */
-import type { LocaleOption } from './NavbarSettings';
-import type { NavApp, NavNotification, NavUser } from './types';
+import type { LocaleOption } from './NavbarSettings.js';
+import type { NavApp, NavNotification, NavUser } from './types.js';
 
 export const NAV_APPS: readonly NavApp[] = [
 	{ id: 'community', name: 'Community', description: 'The fandom home — posts, packs, events', href: '#' },

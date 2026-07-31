@@ -1,5 +1,5 @@
-import { cva, cx } from '../styles/cva';
-import type { VariantProps } from '../styles/cva';
+import { cva, cx } from '../styles/cva.js';
+import type { VariantProps } from '../styles/cva.js';
 
 const avatarStyles = cva({
 	base: 'grid shrink-0 select-none place-items-center overflow-hidden rounded-full font-extrabold text-[#1c1522] [background:linear-gradient(135deg,#c99ef0,#8f7bf5)]',

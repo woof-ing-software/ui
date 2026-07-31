@@ -1,5 +1,5 @@
-import { cva } from '../styles/cva';
-import { focusRing } from '../styles/focus-ring';
+import { cva } from '../styles/cva.js';
+import { focusRing } from '../styles/focus-ring.js';
 
 export const buttonStyles = cva({
 	composes: [focusRing],

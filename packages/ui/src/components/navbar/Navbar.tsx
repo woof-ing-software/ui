@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 
-import { cx } from '../../styles/cva';
-import { Link } from '../Link';
-import { PawIcon } from './icons';
+import { cx } from '../../styles/cva.js';
+import { Link } from '../Link.js';
+import { PawIcon } from './icons.js';
 
 /**
  * The shared platform shell bar (layout.md): pinned, frosted, accent-tinted.

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Switch as RACSwitch, composeRenderProps } from 'react-aria-components';
 import type { SwitchProps as RACSwitchProps } from 'react-aria-components';
 
-import { cva, cx } from '../styles/cva';
+import { cva, cx } from '../styles/cva.js';
 
 const trackStyles = cva({
 	base: [

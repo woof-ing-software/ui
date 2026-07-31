@@ -1,8 +1,8 @@
 import { Button as RACButton, composeRenderProps } from 'react-aria-components';
 import type { ButtonProps as RACButtonProps } from 'react-aria-components';
 
-import type { VariantProps } from '../styles/cva';
-import { buttonStyles, iconButtonStyles } from './Button.styles';
+import type { VariantProps } from '../styles/cva.js';
+import { buttonStyles, iconButtonStyles } from './Button.styles.js';
 
 export type ButtonProps = RACButtonProps & VariantProps<typeof buttonStyles>;
 

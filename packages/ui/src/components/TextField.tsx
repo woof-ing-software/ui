@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import { TextField as RACTextField, composeRenderProps } from 'react-aria-components';
 import type { TextFieldProps as RACTextFieldProps, ValidationResult } from 'react-aria-components';
 
-import { cx } from '../styles/cva';
-import { Description, FieldError, Input, Label } from './Field';
+import { cx } from '../styles/cva.js';
+import { Description, FieldError, Input, Label } from './Field.js';
 
 export type TextFieldProps = RACTextFieldProps & {
 	description?: ReactNode;

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-aria-components';
 
-import { cva, cx } from '../styles/cva';
+import { cva, cx } from '../styles/cva.js';
 
 const segmentStyles = cva({
 	base: [

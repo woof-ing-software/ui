@@ -1,4 +1,4 @@
-import { cva } from '../styles/cva';
+import { cva } from '../styles/cva.js';
 
 export const inputStyles = cva({
 	base: [

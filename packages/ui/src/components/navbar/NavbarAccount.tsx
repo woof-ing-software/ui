@@ -1,10 +1,10 @@
 import { Button as RACButton, MenuTrigger } from 'react-aria-components';
 
-import { cva } from '../../styles/cva';
-import { Avatar } from '../Avatar';
-import { Button } from '../Button';
-import { Menu, MenuItem, MenuSeparator } from '../Menu';
-import type { NavUser } from './types';
+import { cva } from '../../styles/cva.js';
+import { Avatar } from '../Avatar.js';
+import { Button } from '../Button.js';
+import { Menu, MenuItem, MenuSeparator } from '../Menu.js';
+import type { NavUser } from './types.js';
 
 const accountButtonStyles = cva({
 	base: [

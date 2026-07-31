@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Bell } from 'lucide-react';
 import { DialogTrigger, Heading } from 'react-aria-components';
 
-import { IconButton } from './Button';
-import { Popover, PopoverDialog } from './Popover';
-import { Separator } from './Separator';
+import { IconButton } from './Button.js';
+import { Popover, PopoverDialog } from './Popover.js';
+import { Separator } from './Separator.js';
 
 const meta = {
 	title: 'Components/Popover',

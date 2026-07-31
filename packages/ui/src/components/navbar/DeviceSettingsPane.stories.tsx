@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-import { LOCALES, SETTINGS_HINT } from './fixtures';
-import { DeviceSettingsPane } from './NavbarSettings';
-import type { DeviceSettings } from './types';
+import { LOCALES, SETTINGS_HINT } from './fixtures.js';
+import { DeviceSettingsPane } from './NavbarSettings.js';
+import type { DeviceSettings } from './types.js';
 
 function PaneDemo() {
 	const [settings, setSettings] = useState<DeviceSettings>({ hourCycle: '24h', locale: 'en-US', theme: 'dark' });

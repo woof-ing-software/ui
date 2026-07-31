@@ -9,9 +9,9 @@ import {
 } from 'react-aria-components';
 import type { ListBoxItemProps as RACListBoxItemProps, SelectProps as RACSelectProps } from 'react-aria-components';
 
-import { cva, cx } from '../styles/cva';
-import { Description, Label } from './Field';
-import { Popover } from './Popover';
+import { cva, cx } from '../styles/cva.js';
+import { Description, Label } from './Field.js';
+import { Popover } from './Popover.js';
 
 const selectTriggerStyles = cva({
 	base: [

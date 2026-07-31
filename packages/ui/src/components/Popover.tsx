@@ -1,7 +1,7 @@
 import { Dialog as RACDialog, Popover as RACPopover, composeRenderProps } from 'react-aria-components';
 import type { DialogProps as RACDialogProps, PopoverProps as RACPopoverProps } from 'react-aria-components';
 
-import { popoverStyles } from './Popover.styles';
+import { popoverStyles } from './Popover.styles.js';
 
 export type PopoverProps = RACPopoverProps;
 

@@ -10,9 +10,9 @@ import type {
 	SeparatorProps as RACSeparatorProps,
 } from 'react-aria-components';
 
-import { cva, cx } from '../styles/cva';
-import { Popover } from './Popover';
-import type { PopoverProps } from './Popover';
+import { cva, cx } from '../styles/cva.js';
+import { Popover } from './Popover.js';
+import type { PopoverProps } from './Popover.js';
 
 export type MenuProps<TItem extends object> = RACMenuProps<TItem> & {
 	placement?: PopoverProps['placement'];

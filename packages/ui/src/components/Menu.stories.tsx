@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LogOut, Settings, User } from 'lucide-react';
 import { MenuTrigger } from 'react-aria-components';
 
-import { Button } from './Button';
-import { Menu, MenuItem, MenuSeparator } from './Menu';
+import { Button } from './Button.js';
+import { Menu, MenuItem, MenuSeparator } from './Menu.js';
 
 const meta = {
 	title: 'Components/Menu',

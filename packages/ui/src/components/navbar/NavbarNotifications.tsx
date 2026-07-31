@@ -1,10 +1,10 @@
 import { DialogTrigger, Heading } from 'react-aria-components';
 
-import { IconButton } from '../Button';
-import { Link } from '../Link';
-import { Popover, PopoverDialog } from '../Popover';
-import { BellIcon } from './icons';
-import type { NavNotification } from './types';
+import { IconButton } from '../Button.js';
+import { Link } from '../Link.js';
+import { Popover, PopoverDialog } from '../Popover.js';
+import { BellIcon } from './icons.js';
+import type { NavNotification } from './types.js';
 
 export type NavbarNotificationsProps = {
 	readonly allHref?: string;

@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react';
 import { DialogTrigger } from 'react-aria-components';
 
-import { IconButton } from '../Button';
-import { Label } from '../Field';
-import { Popover, PopoverDialog } from '../Popover';
-import { SegmentedControl } from '../SegmentedControl';
-import { Select, SelectItem } from '../Select';
-import { SlidersIcon } from './icons';
-import type { DeviceSettings } from './types';
+import { IconButton } from '../Button.js';
+import { Label } from '../Field.js';
+import { Popover, PopoverDialog } from '../Popover.js';
+import { SegmentedControl } from '../SegmentedControl.js';
+import { Select, SelectItem } from '../Select.js';
+import { SlidersIcon } from './icons.js';
+import type { DeviceSettings } from './types.js';
 
 const THEME_OPTIONS = [
 	{ id: 'system', label: 'System' },

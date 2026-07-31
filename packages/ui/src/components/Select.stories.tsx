@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Select, SelectItem } from './Select';
+import { Select, SelectItem } from './Select.js';
 
 function LanguageDemo() {
 	return (

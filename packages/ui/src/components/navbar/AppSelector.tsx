@@ -6,10 +6,10 @@ import {
 	Separator as RACSeparator,
 } from 'react-aria-components';
 
-import { cva, cx } from '../../styles/cva';
-import { Popover } from '../Popover';
-import { ChevronDownIcon } from './icons';
-import type { NavApp } from './types';
+import { cva, cx } from '../../styles/cva.js';
+import { Popover } from '../Popover.js';
+import { ChevronDownIcon } from './icons.js';
+import type { NavApp } from './types.js';
 
 const pillStyles = cva({
 	base: [

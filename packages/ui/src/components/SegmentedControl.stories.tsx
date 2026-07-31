@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-import { SegmentedControl } from './SegmentedControl';
+import { SegmentedControl } from './SegmentedControl.js';
 
 function Demo() {
 	const [value, setValue] = useState('dark');

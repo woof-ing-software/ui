@@ -1,9 +1,9 @@
 import { Link as RACLink, composeRenderProps } from 'react-aria-components';
 import type { LinkProps as RACLinkProps } from 'react-aria-components';
 
-import { cva } from '../styles/cva';
-import type { VariantProps } from '../styles/cva';
-import { focusRing } from '../styles/focus-ring';
+import { cva } from '../styles/cva.js';
+import type { VariantProps } from '../styles/cva.js';
+import { focusRing } from '../styles/focus-ring.js';
 
 const linkStyles = cva({
 	composes: [focusRing],

@@ -12,8 +12,8 @@ import type {
 	TextProps,
 } from 'react-aria-components';
 
-import { cx } from '../styles/cva';
-import { inputStyles } from './Field.styles';
+import { cx } from '../styles/cva.js';
+import { inputStyles } from './Field.styles.js';
 
 export function Label(props: RACLabelProps) {
 	return (

@@ -6,6 +6,7 @@ export default defineConfig({
 		dts({
 			include: ['src'],
 			exclude: ['src/**/*.stories.tsx'],
+			bundleTypes: true,
 		}),
 	],
 	build: {

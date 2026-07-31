@@ -1,6 +1,6 @@
 import type { Decorator, Preview } from '@storybook/react-vite';
 
-import { PlatformGlobals } from './PlatformGlobals';
+import { PlatformGlobals } from './PlatformGlobals.js';
 
 import './preview.css';
 

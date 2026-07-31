@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
-import { AppSelector } from './AppSelector';
-import { LOCALES, NAV_APPS, NAV_NOTIFICATIONS, NAV_USER, SETTINGS_HINT } from './fixtures';
-import { Navbar, NavbarBrand, NavbarCrumb, NavbarSpacer } from './Navbar';
-import { NavbarAccount } from './NavbarAccount';
-import { NavbarNotifications } from './NavbarNotifications';
-import { NavbarSettings } from './NavbarSettings';
-import type { DeviceSettings, NavUser } from './types';
+import { AppSelector } from './AppSelector.js';
+import { LOCALES, NAV_APPS, NAV_NOTIFICATIONS, NAV_USER, SETTINGS_HINT } from './fixtures.js';
+import { Navbar, NavbarBrand, NavbarCrumb, NavbarSpacer } from './Navbar.js';
+import { NavbarAccount } from './NavbarAccount.js';
+import { NavbarNotifications } from './NavbarNotifications.js';
+import { NavbarSettings } from './NavbarSettings.js';
+import type { DeviceSettings, NavUser } from './types.js';
 
 function resolveTheme(theme: DeviceSettings['theme']) {
 	if (theme !== 'system') {
