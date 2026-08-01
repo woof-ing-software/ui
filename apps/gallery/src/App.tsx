@@ -1,5 +1,6 @@
 import {
 	AppSelector,
+	AppShell,
 	Button,
 	IconButton,
 	Link,
@@ -105,161 +106,163 @@ export function App() {
 	}, [accent, theme]);
 
 	return (
-		<>
-			<Navbar>
-				<NavbarBrand />
-				<NavbarCrumb />
-				<AppSelector
-					apps={NAV_APPS}
-					currentAppId={accent}
-					onSelect={(appId) => {
-						const known = APPS.find((app) => app === appId);
-						if (known) {
-							setAccent(known);
-						}
-					}}
-				/>
-				<NavbarSpacer />
-				<NavbarSettings
-					hint="Stored on this device. Syncs to your account when you sign in."
-					locales={LOCALES}
-					onChange={setSettings}
-					value={settings}
-				/>
-				<NavbarAccount accountSettingsHref="#" profileHref="#" user={{ name: 'Riza' }} />
-				<NavbarNotifications allHref="#" notifications={NAV_NOTIFICATIONS} />
-			</Navbar>
-			<div className="px-safe pb-safe">
-				<main className="mx-auto flex max-w-4xl flex-col gap-6 px-4 py-7 sm:gap-8 sm:px-6 sm:py-10">
-					<header className="flex flex-wrap items-center justify-between gap-4">
-						<h1 className="font-rounded text-xl font-extrabold tracking-tight">
-							woof<b className="text-accent-ink">.ing</b> UI
-						</h1>
-						<div className="flex min-w-0 max-w-full flex-wrap gap-5">
-							<Segmented
-								label="Theme"
-								onChange={(next) => setSettings((prev) => ({ ...prev, theme: next }))}
-								options={THEMES}
-								value={theme}
-							/>
-							<Segmented label="App" onChange={(next) => setAccent(next)} options={APPS} value={accent} />
-						</div>
-					</header>
+		<AppShell
+			className="px-safe pb-safe"
+			navbar={
+				<Navbar>
+					<NavbarBrand />
+					<NavbarCrumb />
+					<AppSelector
+						apps={NAV_APPS}
+						currentAppId={accent}
+						onSelect={(appId) => {
+							const known = APPS.find((app) => app === appId);
+							if (known) {
+								setAccent(known);
+							}
+						}}
+					/>
+					<NavbarSpacer />
+					<NavbarSettings
+						hint="Stored on this device. Syncs to your account when you sign in."
+						locales={LOCALES}
+						onChange={setSettings}
+						value={settings}
+					/>
+					<NavbarAccount accountSettingsHref="#" profileHref="#" user={{ name: 'Riza' }} />
+					<NavbarNotifications allHref="#" notifications={NAV_NOTIFICATIONS} />
+				</Navbar>
+			}
+		>
+			<div className="mx-auto flex max-w-4xl flex-col gap-6 px-4 py-7 sm:gap-8 sm:px-6 sm:py-10">
+				<header className="flex flex-wrap items-center justify-between gap-4">
+					<h1 className="font-rounded text-xl font-extrabold tracking-tight">
+						woof<b className="text-accent-ink">.ing</b> UI
+					</h1>
+					<div className="flex min-w-0 max-w-full flex-wrap gap-5">
+						<Segmented
+							label="Theme"
+							onChange={(next) => setSettings((prev) => ({ ...prev, theme: next }))}
+							options={THEMES}
+							value={theme}
+						/>
+						<Segmented label="App" onChange={(next) => setAccent(next)} options={APPS} value={accent} />
+					</div>
+				</header>
 
-					<Section title="Buttons">
-						<div className="flex flex-wrap items-center gap-3">
-							<Button>Log in</Button>
-							<Button variant="secondary">Cancel</Button>
-							<Button variant="ghost">Skip</Button>
-							<Button variant="destructive">Delete</Button>
-							<Button isDisabled>Disabled</Button>
-							<IconButton aria-label="Notifications">
+				<Section title="Buttons">
+					<div className="flex flex-wrap items-center gap-3">
+						<Button>Log in</Button>
+						<Button variant="secondary">Cancel</Button>
+						<Button variant="ghost">Skip</Button>
+						<Button variant="destructive">Delete</Button>
+						<Button isDisabled>Disabled</Button>
+						<IconButton aria-label="Notifications">
+							<Bell size={19} />
+						</IconButton>
+						<IconButton aria-label="Like" variant="solid">
+							<Heart size={19} />
+						</IconButton>
+						<IconButton aria-label="Like" variant="accent">
+							<Heart size={19} />
+						</IconButton>
+					</div>
+					<div className="mt-4 flex items-center gap-3">
+						<Button size="sm">Small</Button>
+						<Button size="md">Medium</Button>
+						<Button size="lg">Large</Button>
+					</div>
+				</Section>
+
+				<Section title="Links">
+					<p className="text-text max-w-md text-sm">
+						By continuing you agree to the <Link href="#">terms of service</Link> and confirm you have read the{' '}
+						<Link href="#" variant="default">
+							privacy policy
+						</Link>
+						.{' '}
+						<Link href="#" variant="muted">
+							Learn more
+						</Link>
+					</p>
+				</Section>
+
+				<Section title="Form">
+					<div className="flex max-w-xs flex-col gap-4">
+						<TextField description="Shown on your profile." label="Display name" placeholder="Riza" />
+						<TextField
+							errorMessage="Enter a valid email address."
+							isInvalid
+							label="Email"
+							placeholder="riza@woof.ing"
+							type="email"
+						/>
+						<Switch defaultSelected>Email notifications</Switch>
+						<Switch>Public profile</Switch>
+					</div>
+				</Section>
+
+				<Section title="Overlays">
+					<div className="flex items-center gap-3">
+						<MenuTrigger>
+							<Button variant="secondary">Account menu</Button>
+							<Menu>
+								<MenuItem>
+									<User aria-hidden /> Profile
+								</MenuItem>
+								<MenuItem>
+									<Settings aria-hidden /> Settings
+								</MenuItem>
+								<MenuSeparator />
+								<MenuItem isDestructive>
+									<LogOut aria-hidden /> Log out
+								</MenuItem>
+							</Menu>
+						</MenuTrigger>
+						<DialogTrigger>
+							<IconButton aria-label="Notifications" variant="solid">
 								<Bell size={19} />
 							</IconButton>
-							<IconButton aria-label="Like" variant="solid">
-								<Heart size={19} />
-							</IconButton>
-							<IconButton aria-label="Like" variant="accent">
-								<Heart size={19} />
-							</IconButton>
-						</div>
-						<div className="mt-4 flex items-center gap-3">
-							<Button size="sm">Small</Button>
-							<Button size="md">Medium</Button>
-							<Button size="lg">Large</Button>
-						</div>
-					</Section>
+							<Popover placement="bottom end">
+								<PopoverDialog className="w-80">
+									<div className="flex items-center justify-between px-3.5 py-3">
+										<Heading className="text-[13px] font-bold" slot="title">
+											Notifications
+										</Heading>
+										<span className="text-muted text-xs font-semibold">Mark all read</span>
+									</div>
+									<Separator />
+									<p className="px-3.5 py-3 text-[13px]">
+										<b className="font-semibold">Riza</b> commented on your post
+										<time className="text-muted mt-0.5 block text-[11px]">2 minutes ago</time>
+									</p>
+								</PopoverDialog>
+							</Popover>
+						</DialogTrigger>
+					</div>
+				</Section>
 
-					<Section title="Links">
-						<p className="text-text max-w-md text-sm">
-							By continuing you agree to the <Link href="#">terms of service</Link> and confirm you have read the{' '}
-							<Link href="#" variant="default">
-								privacy policy
-							</Link>
-							.{' '}
-							<Link href="#" variant="muted">
-								Learn more
-							</Link>
-						</p>
-					</Section>
-
-					<Section title="Form">
-						<div className="flex max-w-xs flex-col gap-4">
-							<TextField description="Shown on your profile." label="Display name" placeholder="Riza" />
-							<TextField
-								errorMessage="Enter a valid email address."
-								isInvalid
-								label="Email"
-								placeholder="riza@woof.ing"
-								type="email"
-							/>
-							<Switch defaultSelected>Email notifications</Switch>
-							<Switch>Public profile</Switch>
-						</div>
-					</Section>
-
-					<Section title="Overlays">
-						<div className="flex items-center gap-3">
-							<MenuTrigger>
-								<Button variant="secondary">Account menu</Button>
-								<Menu>
-									<MenuItem>
-										<User aria-hidden /> Profile
-									</MenuItem>
-									<MenuItem>
-										<Settings aria-hidden /> Settings
-									</MenuItem>
-									<MenuSeparator />
-									<MenuItem isDestructive>
-										<LogOut aria-hidden /> Log out
-									</MenuItem>
-								</Menu>
-							</MenuTrigger>
-							<DialogTrigger>
-								<IconButton aria-label="Notifications" variant="solid">
-									<Bell size={19} />
-								</IconButton>
-								<Popover placement="bottom end">
-									<PopoverDialog className="w-80">
-										<div className="flex items-center justify-between px-3.5 py-3">
-											<Heading className="text-[13px] font-bold" slot="title">
-												Notifications
-											</Heading>
-											<span className="text-muted text-xs font-semibold">Mark all read</span>
-										</div>
-										<Separator />
-										<p className="px-3.5 py-3 text-[13px]">
-											<b className="font-semibold">Riza</b> commented on your post
-											<time className="text-muted mt-0.5 block text-[11px]">2 minutes ago</time>
-										</p>
-									</PopoverDialog>
-								</Popover>
-							</DialogTrigger>
-						</div>
-					</Section>
-
-					<Section title="Tokens">
-						<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-							{(['bg', 'surface', 'surface-2', 'line', 'text', 'muted', 'accent', 'danger'] as const).map((token) => (
-								<div className="flex items-center gap-2.5" key={token}>
-									<span
-										className="border-line size-8 shrink-0 rounded-lg border"
-										style={{ background: `var(--${token})` }}
-									/>
-									<span className="text-muted font-mono text-[11px]">--{token}</span>
-								</div>
-							))}
-						</div>
-						<div className="mt-4 flex flex-col gap-1">
-							{APPS.map((app) => (
-								<p className="text-accent-ink text-sm font-bold" data-accent={app} key={app}>
-									{app} — accent-ink stays readable on every theme
-								</p>
-							))}
-						</div>
-					</Section>
-				</main>
+				<Section title="Tokens">
+					<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+						{(['bg', 'surface', 'surface-2', 'line', 'text', 'muted', 'accent', 'danger'] as const).map((token) => (
+							<div className="flex items-center gap-2.5" key={token}>
+								<span
+									className="border-line size-8 shrink-0 rounded-lg border"
+									style={{ background: `var(--${token})` }}
+								/>
+								<span className="text-muted font-mono text-[11px]">--{token}</span>
+							</div>
+						))}
+					</div>
+					<div className="mt-4 flex flex-col gap-1">
+						{APPS.map((app) => (
+							<p className="text-accent-ink text-sm font-bold" data-accent={app} key={app}>
+								{app} — accent-ink stays readable on every theme
+							</p>
+						))}
+					</div>
+				</Section>
 			</div>
-		</>
+		</AppShell>
 	);
 }

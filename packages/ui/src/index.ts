@@ -21,6 +21,7 @@ export type { SwitchProps } from './components/Switch.js';
 export { TextField } from './components/TextField.js';
 export type { TextFieldProps } from './components/TextField.js';
 export { AppSelector } from './components/navbar/AppSelector.js';
+export { AppShell } from './components/navbar/AppShell.js';
 export type { AppSelectorProps } from './components/navbar/AppSelector.js';
 export { Navbar, NavbarBrand, NavbarCrumb, NavbarSpacer } from './components/navbar/Navbar.js';
 export { NavbarAccount } from './components/navbar/NavbarAccount.js';

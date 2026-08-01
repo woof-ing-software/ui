@@ -35,6 +35,44 @@
 	--color-pill-ink: color-mix(in srgb, var(--accent) 65%, var(--text));
 }
 
+/* App-accent scrollbars. Colors are computed at the use site so scoped --accent overrides
+   and data-theme swaps both apply (same caveat as accent-ink — see tokens.css); mixing
+   toward --muted keeps the thumb readable against --bg on every theme. */
+@layer base {
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--accent) 55%, var(--muted)) color-mix(in srgb, var(--text) 7%, var(--bg));
+	}
+
+	/* Safari fallback — Chrome/Firefox use scrollbar-color above and ignore these */
+	@supports not (scrollbar-color: auto) {
+		*::-webkit-scrollbar {
+			width: 10px;
+			height: 10px;
+		}
+
+		*::-webkit-scrollbar-track {
+			background: color-mix(in srgb, var(--text) 7%, var(--bg));
+		}
+
+		*::-webkit-scrollbar-corner {
+			background: transparent;
+		}
+
+		*::-webkit-scrollbar-thumb {
+			border: 3px solid transparent;
+			border-radius: 999px;
+			background: color-mix(in srgb, var(--accent) 55%, var(--muted));
+			background-clip: padding-box;
+		}
+
+		*::-webkit-scrollbar-thumb:hover {
+			background: color-mix(in srgb, var(--accent) 75%, var(--muted));
+			background-clip: padding-box;
+		}
+	}
+}
+
 /* safe-area helpers (notch / home indicator). Additive paddings — put them on a bar or
    wrapper, keep normal px/py on the element inside. Requires viewport-fit=cover. */
 @utility pt-safe {
