@@ -19,8 +19,8 @@ export function TextField({ label, description, errorMessage, placeholder, ...pr
 			className={composeRenderProps(props.className, (className) => cx('flex flex-col gap-1.5', className))}
 		>
 			{label ? <Label>{label}</Label> : null}
-			<Input placeholder={placeholder} />
 			{description ? <Description>{description}</Description> : null}
+			<Input placeholder={placeholder} />
 			<FieldError>{errorMessage}</FieldError>
 		</RACTextField>
 	);
