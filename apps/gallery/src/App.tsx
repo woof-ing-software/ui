@@ -2,26 +2,30 @@ import {
 	AppSelector,
 	AppShell,
 	Button,
+	CampfireIcon,
 	IconButton,
+	LifebuoyIcon,
 	Link,
 	Menu,
 	MenuItem,
 	MenuSeparator,
 	Navbar,
-	NavbarAccount,
 	NavbarBrand,
 	NavbarCrumb,
 	NavbarNotifications,
-	NavbarSettings,
 	NavbarSpacer,
+	NavbarVisitor,
+	NewspaperIcon,
+	PaletteIcon,
 	Popover,
 	PopoverDialog,
 	Separator,
+	ShieldIcon,
 	Switch,
 	TextField,
 } from '@woofing/ui';
-import type { DeviceSettings, NavApp, NavNotification } from '@woofing/ui';
-import { Bell, Heart, LogOut, Settings, User } from 'lucide-react';
+import type { DeviceSettings, NavApp, NavNotification, VisitorAppLink } from '@woofing/ui';
+import { Bell, Brush, Heart, LogOut, Settings, User, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { DialogTrigger, Heading, MenuTrigger } from 'react-aria-components';
 
@@ -29,12 +33,41 @@ const THEMES = ['dark', 'light', 'black'] as const;
 const APPS = ['community', 'art-corner', 'blog', 'support', 'moderation'] as const;
 
 const NAV_APPS: readonly NavApp[] = [
-	{ id: 'community', name: 'Community', description: 'The fandom home — posts, packs, events', href: '#' },
-	{ id: 'art-corner', name: 'Art Corner', description: 'Auctions, commissions, and galleries', href: '#' },
-	{ id: 'blog', name: 'Blog', description: 'News and stories from the pack', href: '#' },
-	{ id: 'support', name: 'Support', description: 'Help center and tickets', href: '#' },
-	{ id: 'moderation', name: 'Moderation', description: 'Trust & safety tools', href: '#', isStaffOnly: true },
+	{
+		id: 'community',
+		name: 'Community',
+		description: 'The fandom home — posts, packs, events',
+		href: '#',
+		icon: <CampfireIcon />,
+	},
+	{
+		id: 'art-corner',
+		name: 'Art Corner',
+		description: 'Auctions, commissions, and galleries',
+		href: '#',
+		icon: <PaletteIcon />,
+	},
+	{ id: 'blog', name: 'Blog', description: 'News and stories from the pack', href: '#', icon: <NewspaperIcon /> },
+	{ id: 'support', name: 'Support', description: 'Help center and tickets', href: '#', icon: <LifebuoyIcon /> },
+	{
+		id: 'moderation',
+		name: 'Moderation',
+		description: 'Trust & safety tools',
+		href: '#',
+		icon: <ShieldIcon />,
+		isStaffOnly: true,
+	},
 ];
+
+const APP_LINKS: Record<string, readonly VisitorAppLink[]> = {
+	community: [
+		{ id: 'profile', href: '#', icon: <User aria-hidden />, label: 'Your profile page' },
+		{ id: 'packs', href: '#', icon: <Users aria-hidden />, label: 'Your packs', meta: '4' },
+	],
+	'art-corner': [
+		{ id: 'commissions', href: '#', icon: <Brush aria-hidden />, label: 'Your commissions', meta: '2 open' },
+	],
+};
 
 const NAV_NOTIFICATIONS: readonly NavNotification[] = [
 	{ id: '1', isUnread: true, message: 'Riza commented on your post', time: '2 minutes ago' },
@@ -123,14 +156,15 @@ export function App() {
 						}}
 					/>
 					<NavbarSpacer />
-					<NavbarSettings
-						hint="Stored on this device. Syncs to your account when you sign in."
-						locales={LOCALES}
-						onChange={setSettings}
-						value={settings}
-					/>
-					<NavbarAccount accountSettingsHref="#" profileHref="#" user={{ name: 'Riza' }} />
 					<NavbarNotifications allHref="#" notifications={NAV_NOTIFICATIONS} />
+					<NavbarVisitor
+						accountSettingsHref="#"
+						appLinks={APP_LINKS[accent]}
+						appName={NAV_APPS.find((app) => app.id === accent)?.name}
+						profileHref="#"
+						settings={{ locales: LOCALES, onChange: (next) => setSettings(next), value: settings }}
+						user={{ name: 'Riza' }}
+					/>
 				</Navbar>
 			}
 		>

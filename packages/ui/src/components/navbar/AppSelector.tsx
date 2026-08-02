@@ -42,6 +42,14 @@ function AppCard({ app, isCurrent }: { readonly app: NavApp; readonly isCurrent:
 			id={app.id}
 			textValue={app.name}
 		>
+			{app.icon ? (
+				<span
+					aria-hidden
+					className="shrink-0 text-[color-mix(in_srgb,var(--accent)_75%,var(--text))] [&_svg]:size-[23px]"
+				>
+					{app.icon}
+				</span>
+			) : null}
 			<div className="flex-1">
 				<span className="block text-[13.5px] font-[650] text-[color-mix(in_srgb,var(--accent)_75%,var(--text))]">
 					{app.name}
@@ -77,7 +85,13 @@ export function AppSelector(props: AppSelectorProps) {
 	return (
 		<MenuTrigger>
 			<RACButton className={pillStyles()}>
-				{current?.name}
+				{current?.icon ? (
+					<span aria-hidden className="-ml-0.5 [&_svg]:size-[21px]">
+						{current.icon}
+					</span>
+				) : null}
+				{/* with an icon present the name collapses on mobile — the icon is the compact form */}
+				<span className={current?.icon ? 'max-sm:hidden' : undefined}>{current?.name}</span>
 				<ChevronDownIcon className="size-3 opacity-70" />
 			</RACButton>
 			<Popover className="w-[330px]" placement="bottom start">

@@ -30,7 +30,22 @@ export { NavbarNotifications } from './components/navbar/NavbarNotifications.js'
 export type { NavbarNotificationsProps } from './components/navbar/NavbarNotifications.js';
 export { DeviceSettingsPane, NavbarSettings } from './components/navbar/NavbarSettings.js';
 export type { DeviceSettingsPaneProps, LocaleOption, NavbarSettingsProps } from './components/navbar/NavbarSettings.js';
-export { BellIcon, ChevronDownIcon, PawIcon, SlidersIcon } from './components/navbar/icons.js';
+export { NavbarVisitor } from './components/navbar/NavbarVisitor.js';
+export type { NavbarVisitorProps, VisitorAppLink } from './components/navbar/NavbarVisitor.js';
+export {
+	BellIcon,
+	CampfireIcon,
+	ChevronDownIcon,
+	GearIcon,
+	LifebuoyIcon,
+	NewspaperIcon,
+	PaletteIcon,
+	PawIcon,
+	ShieldIcon,
+	SignOutIcon,
+	SlidersIcon,
+	UserIcon,
+} from './components/navbar/icons.js';
 export type { DeviceSettings, NavApp, NavNotification, NavUser } from './components/navbar/types.js';
 export { cva, cx } from './styles/cva.js';
 export type { VariantProps } from './styles/cva.js';

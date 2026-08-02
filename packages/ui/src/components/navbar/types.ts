@@ -5,6 +5,8 @@ export type NavApp = {
 	readonly id: string;
 	readonly description?: string;
 	readonly href?: string;
+	/** Shown in the pill (icon-only below sm) and the selector cards. */
+	readonly icon?: ReactNode;
 	readonly isStaffOnly?: boolean;
 	readonly name: string;
 };

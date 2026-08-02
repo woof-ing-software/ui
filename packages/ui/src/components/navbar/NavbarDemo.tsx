@@ -3,11 +3,10 @@ import { useEffect, useState } from 'react';
 
 import { AppSelector } from './AppSelector.js';
 import { AppShell } from './AppShell.js';
-import { LOCALES, NAV_APPS, NAV_NOTIFICATIONS, SETTINGS_HINT } from './fixtures.js';
+import { LOCALES, NAV_APPS, NAV_NOTIFICATIONS, SETTINGS_HINT, VISITOR_APP_LINKS } from './fixtures.js';
 import { Navbar, NavbarBrand, NavbarCrumb, NavbarSpacer } from './Navbar.js';
-import { NavbarAccount } from './NavbarAccount.js';
 import { NavbarNotifications } from './NavbarNotifications.js';
-import { NavbarSettings } from './NavbarSettings.js';
+import { NavbarVisitor } from './NavbarVisitor.js';
 import type { DeviceSettings, NavUser } from './types.js';
 
 function resolveTheme(theme: DeviceSettings['theme']) {
@@ -48,9 +47,20 @@ export function NavbarDemo({
 					<NavbarCrumb />
 					<AppSelector apps={NAV_APPS} currentAppId={currentApp} onSelect={setCurrentApp} />
 					<NavbarSpacer />
-					<NavbarSettings hint={SETTINGS_HINT} locales={LOCALES} onChange={setSettings} value={settings} />
-					<NavbarAccount accountSettingsHref="#" profileHref="#" user={user} />
 					{user ? <NavbarNotifications allHref="#" notifications={NAV_NOTIFICATIONS} /> : null}
+					<NavbarVisitor
+						accountSettingsHref="#"
+						appLinks={user ? VISITOR_APP_LINKS[currentApp] : undefined}
+						appName={NAV_APPS.find((app) => app.id === currentApp)?.name}
+						profileHref="#"
+						settings={{
+							hint: user ? undefined : SETTINGS_HINT,
+							locales: LOCALES,
+							onChange: (next) => setSettings(next),
+							value: settings,
+						}}
+						user={user}
+					/>
 				</Navbar>
 			}
 		>
