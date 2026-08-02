@@ -1,5 +1,6 @@
 node_modules/
 dist/
+dist-cards/
 storybook-static/
 .turbo/
 *.log
