@@ -40,7 +40,7 @@ export type DeviceSettingsPaneProps = {
  */
 export function DeviceSettingsPane(props: DeviceSettingsPaneProps) {
 	return (
-		<div className="grid w-[290px] gap-[13px] p-3.5">
+		<div className="max-sm:w-full grid w-[290px] gap-[13px] p-3.5">
 			<div className="grid gap-1.5">
 				<Label>Theme</Label>
 				<SegmentedControl

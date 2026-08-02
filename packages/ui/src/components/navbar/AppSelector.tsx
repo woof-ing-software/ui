@@ -1,13 +1,16 @@
 import {
 	Button as RACButton,
+	DialogTrigger,
 	Menu as RACMenu,
 	MenuItem as RACMenuItem,
 	MenuTrigger,
 	Separator as RACSeparator,
 } from 'react-aria-components';
 
+import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { cva, cx } from '../../styles/cva.js';
 import { Popover } from '../Popover.js';
+import { Sheet } from '../Sheet.js';
 import { ChevronDownIcon } from './icons.js';
 import type { NavApp } from './types.js';
 
@@ -70,40 +73,80 @@ function AppCard({ app, isCurrent }: { readonly app: NavApp; readonly isCurrent:
 	);
 }
 
+export type AppMenuProps = {
+	readonly apps: readonly NavApp[];
+	readonly currentAppId: string;
+	onAction?(appId: string): void;
+};
+
+/** The tinted app-card list — shared by the desktop popover and the mobile sheet. */
+export function AppMenu(props: AppMenuProps) {
+	const publicApps = props.apps.filter((app) => !app.isStaffOnly);
+	const staffApps = props.apps.filter((app) => app.isStaffOnly);
+
+	return (
+		<RACMenu className="p-[7px] outline-0" onAction={(key) => props.onAction?.(String(key))}>
+			{publicApps.map((app) => (
+				<AppCard app={app} isCurrent={app.id === props.currentAppId} key={app.id} />
+			))}
+			{staffApps.length > 0 ? <RACSeparator className="bg-line mx-1 mt-[7px] h-px border-0" /> : null}
+			{staffApps.map((app) => (
+				<AppCard app={app} isCurrent={app.id === props.currentAppId} key={app.id} />
+			))}
+		</RACMenu>
+	);
+}
+
 export type AppSelectorProps = {
 	readonly apps: readonly NavApp[];
 	readonly currentAppId: string;
 	onSelect?(appId: string): void;
 };
 
-/** App-pill trigger + the tinted app-card switcher (desktop popover; bottom sheet is a later pass). */
+/** App-pill trigger + the tinted app-card switcher: popover on desktop, bottom sheet below sm. */
 export function AppSelector(props: AppSelectorProps) {
+	const isMobile = useMediaQuery('(max-width: 639px)');
 	const current = props.apps.find((app) => app.id === props.currentAppId);
-	const publicApps = props.apps.filter((app) => !app.isStaffOnly);
-	const staffApps = props.apps.filter((app) => app.isStaffOnly);
+
+	const pill = (
+		// explicit label: below sm the name span is display:none and would leave the button nameless
+		<RACButton aria-label={current ? `Switch app: ${current.name}` : 'Switch app'} className={pillStyles()}>
+			{current?.icon ? (
+				<span aria-hidden className="-ml-0.5 [&_svg]:size-[21px]">
+					{current.icon}
+				</span>
+			) : null}
+			{/* with an icon present the name collapses on mobile — the icon is the compact form */}
+			<span className={current?.icon ? 'max-sm:hidden' : undefined}>{current?.name}</span>
+			<ChevronDownIcon className="size-3 opacity-70" />
+		</RACButton>
+	);
+
+	if (isMobile) {
+		return (
+			<DialogTrigger>
+				{pill}
+				<Sheet aria-label="Switch app">
+					{({ close }) => (
+						<AppMenu
+							apps={props.apps}
+							currentAppId={props.currentAppId}
+							onAction={(appId) => {
+								props.onSelect?.(appId);
+								close();
+							}}
+						/>
+					)}
+				</Sheet>
+			</DialogTrigger>
+		);
+	}
 
 	return (
 		<MenuTrigger>
-			<RACButton className={pillStyles()}>
-				{current?.icon ? (
-					<span aria-hidden className="-ml-0.5 [&_svg]:size-[21px]">
-						{current.icon}
-					</span>
-				) : null}
-				{/* with an icon present the name collapses on mobile — the icon is the compact form */}
-				<span className={current?.icon ? 'max-sm:hidden' : undefined}>{current?.name}</span>
-				<ChevronDownIcon className="size-3 opacity-70" />
-			</RACButton>
+			{pill}
 			<Popover className="w-[330px]" placement="bottom start">
-				<RACMenu className="p-[7px] outline-0" onAction={(key) => props.onSelect?.(String(key))}>
-					{publicApps.map((app) => (
-						<AppCard app={app} isCurrent={app.id === props.currentAppId} key={app.id} />
-					))}
-					{staffApps.length > 0 ? <RACSeparator className="bg-line mx-1 mt-[7px] h-px border-0" /> : null}
-					{staffApps.map((app) => (
-						<AppCard app={app} isCurrent={app.id === props.currentAppId} key={app.id} />
-					))}
-				</RACMenu>
+				<AppMenu apps={props.apps} currentAppId={props.currentAppId} onAction={(appId) => props.onSelect?.(appId)} />
 			</Popover>
 		</MenuTrigger>
 	);
