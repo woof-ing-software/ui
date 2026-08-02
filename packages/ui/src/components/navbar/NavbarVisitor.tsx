@@ -7,11 +7,13 @@
 import type { ReactNode } from 'react';
 import { Button as RACButton, DialogTrigger, Link as RACLink } from 'react-aria-components';
 
+import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { cva, cx } from '../../styles/cva.js';
 import { Avatar } from '../Avatar.js';
 import { Button } from '../Button.js';
 import { Link } from '../Link.js';
 import { Popover, PopoverDialog } from '../Popover.js';
+import { Sheet } from '../Sheet.js';
 import { ChevronDownIcon, GearIcon, SignOutIcon, UserIcon } from './icons.js';
 import { DeviceSettingsPane } from './NavbarSettings.js';
 import type { DeviceSettingsPaneProps } from './NavbarSettings.js';
@@ -83,6 +85,63 @@ export type NavbarVisitorProps = {
 
 export function NavbarVisitor(props: NavbarVisitorProps) {
 	const { user } = props;
+	const isMobile = useMediaQuery('(max-width: 639px)');
+
+	const panel = (
+		<>
+			{user ? (
+				<div className="flex items-center gap-3 p-3.5">
+					<Avatar initials={user.initials} name={user.name} size="lg" src={user.avatarSrc} />
+					<div className="min-w-0 flex-1">
+						<p className="truncate text-sm font-bold">{user.name}</p>
+						<p className="text-muted text-xs">Signed in on every app</p>
+					</div>
+					<Link className="text-[12.5px]" href={props.profileHref}>
+						View profile
+					</Link>
+				</div>
+			) : (
+				<div className="px-3.5 pt-4 pb-3.5">
+					<p className="text-sm font-bold">Browsing as a visitor</p>
+					<p className="text-muted mt-0.5 mb-3 text-xs">
+						One account for every woof.ing app — sign in and sign up are the same flow.
+					</p>
+					<Button className="w-full" onPress={() => props.onLogin?.()}>
+						Log in
+					</Button>
+				</div>
+			)}
+
+			{user && props.appLinks?.length ? (
+				<div className="border-line border-t p-2">
+					{props.appName ? <SectionLabel className="text-accent-ink">{props.appName}</SectionLabel> : null}
+					{props.appLinks.map((link) => (
+						<PanelLink key={link.id} {...link} />
+					))}
+				</div>
+			) : null}
+
+			<div className="border-line border-t">
+				<SectionLabel className="px-3.5 pt-3 pb-0">Device settings</SectionLabel>
+				<DeviceSettingsPane {...props.settings} />
+			</div>
+
+			{user ? (
+				<div className="border-line border-t p-2">
+					<PanelLink
+						href={props.accountSettingsHref}
+						icon={<GearIcon />}
+						id="account-settings"
+						label="Account settings"
+					/>
+					<RACButton className={rowStyles({ isDestructive: true })} onPress={() => props.onSignOut?.()}>
+						<SignOutIcon />
+						Sign out
+					</RACButton>
+				</div>
+			) : null}
+		</>
+	);
 
 	return (
 		<DialogTrigger>
@@ -105,61 +164,13 @@ export function NavbarVisitor(props: NavbarVisitorProps) {
 					<ChevronDownIcon className="text-muted max-sm:hidden size-3" />
 				</RACButton>
 			)}
-			<Popover placement="bottom end">
-				<PopoverDialog className="w-[318px]">
-					{user ? (
-						<div className="flex items-center gap-3 p-3.5">
-							<Avatar initials={user.initials} name={user.name} size="lg" src={user.avatarSrc} />
-							<div className="min-w-0 flex-1">
-								<p className="truncate text-sm font-bold">{user.name}</p>
-								<p className="text-muted text-xs">Signed in on every app</p>
-							</div>
-							<Link className="text-[12.5px]" href={props.profileHref}>
-								View profile
-							</Link>
-						</div>
-					) : (
-						<div className="px-3.5 pt-4 pb-3.5">
-							<p className="text-sm font-bold">Browsing as a visitor</p>
-							<p className="text-muted mt-0.5 mb-3 text-xs">
-								One account for every woof.ing app — sign in and sign up are the same flow.
-							</p>
-							<Button className="w-full" onPress={() => props.onLogin?.()}>
-								Log in
-							</Button>
-						</div>
-					)}
-
-					{user && props.appLinks?.length ? (
-						<div className="border-line border-t p-2">
-							{props.appName ? <SectionLabel className="text-accent-ink">{props.appName}</SectionLabel> : null}
-							{props.appLinks.map((link) => (
-								<PanelLink key={link.id} {...link} />
-							))}
-						</div>
-					) : null}
-
-					<div className="border-line border-t">
-						<SectionLabel className="px-3.5 pt-3 pb-0">Device settings</SectionLabel>
-						<DeviceSettingsPane {...props.settings} />
-					</div>
-
-					{user ? (
-						<div className="border-line border-t p-2">
-							<PanelLink
-								href={props.accountSettingsHref}
-								icon={<GearIcon />}
-								id="account-settings"
-								label="Account settings"
-							/>
-							<RACButton className={rowStyles({ isDestructive: true })} onPress={() => props.onSignOut?.()}>
-								<SignOutIcon />
-								Sign out
-							</RACButton>
-						</div>
-					) : null}
-				</PopoverDialog>
-			</Popover>
+			{isMobile ? (
+				<Sheet aria-label={user ? `Account: ${user.name}` : 'Visitor menu'}>{panel}</Sheet>
+			) : (
+				<Popover placement="bottom end">
+					<PopoverDialog className="w-[318px]">{panel}</PopoverDialog>
+				</Popover>
+			)}
 		</DialogTrigger>
 	);
 }
