@@ -20,13 +20,12 @@ export function NavbarNotifications(props: NavbarNotificationsProps) {
 		<DialogTrigger>
 			<IconButton
 				aria-label={unreadCount > 0 ? `Notifications (${unreadCount} unread)` : 'Notifications'}
-				className={unreadCount > 0 ? 'text-accent-ink hover:text-accent-ink' : undefined}
+				className={`[&_svg]:size-[21px] ${unreadCount > 0 ? 'text-accent-ink hover:text-accent-ink' : ''}`}
 			>
-				<BellIcon className="size-[19px]" />
+				<BellIcon isFilled={unreadCount > 0} />
+				{/* dot only — the count lives in the aria-label and the popover (a number is illegible at this size) */}
 				{unreadCount > 0 ? (
-					<span className="bg-accent text-on-accent border-bg absolute -top-0.5 -right-0.5 grid h-[18px] min-w-[18px] place-items-center rounded-full border-2 px-[3px] text-[11px] leading-none font-extrabold">
-						{unreadCount > 9 ? '9+' : unreadCount}
-					</span>
+					<span aria-hidden className="bg-accent border-bg absolute top-[3px] right-[3px] size-3 rounded-full border-2" />
 				) : null}
 			</IconButton>
 			<Popover className="w-[330px]" placement="bottom end">

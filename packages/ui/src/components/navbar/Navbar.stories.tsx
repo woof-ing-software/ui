@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { NAV_USER } from './fixtures.js';
+import { NAV_NOTIFICATIONS, NAV_USER } from './fixtures.js';
 import { NavbarDemo } from './NavbarDemo.js';
 
 const meta = {
@@ -24,5 +24,13 @@ export const LoggedIn: Story = {
 export const LoggedOut: Story = {
 	args: {
 		user: null,
+	},
+};
+
+/** No unread — bell stays outline; with unread it fills in (see LoggedIn). */
+export const AllCaughtUp: Story = {
+	args: {
+		notifications: NAV_NOTIFICATIONS.map((notification) => ({ ...notification, isUnread: false })),
+		user: NAV_USER,
 	},
 };

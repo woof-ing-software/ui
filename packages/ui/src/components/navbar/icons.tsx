@@ -29,11 +29,13 @@ function StrokeIcon({ children, className }: { readonly children: React.ReactNod
 	);
 }
 
-export function BellIcon({ className }: { readonly className?: string }) {
+export function BellIcon({ className, isFilled }: { readonly className?: string; readonly isFilled?: boolean }) {
+	const fill = isFilled ? 'currentColor' : undefined;
+
 	return (
 		<StrokeIcon className={className}>
-			<path d="M18 15.5v-5.3a6 6 0 1 0-12 0v5.3L4.4 18h15.2z" />
-			<path d="M10.3 20.5a1.9 1.9 0 0 0 3.4 0" />
+			<path d="M18 15.5v-5.3a6 6 0 1 0-12 0v5.3L4.4 18h15.2z" fill={fill} />
+			<path d="M10.3 20.5a1.9 1.9 0 0 0 3.4 0" fill={fill} />
 		</StrokeIcon>
 	);
 }

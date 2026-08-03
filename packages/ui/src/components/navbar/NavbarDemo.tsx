@@ -7,7 +7,7 @@ import { LOCALES, NAV_APPS, NAV_NOTIFICATIONS, SETTINGS_HINT, VISITOR_APP_LINKS 
 import { Navbar, NavbarBrand, NavbarCrumb, NavbarSpacer } from './Navbar.js';
 import { NavbarNotifications } from './NavbarNotifications.js';
 import { NavbarVisitor } from './NavbarVisitor.js';
-import type { DeviceSettings, NavUser } from './types.js';
+import type { DeviceSettings, NavNotification, NavUser } from './types.js';
 
 function resolveTheme(theme: DeviceSettings['theme']) {
 	if (theme !== 'system') {
@@ -19,9 +19,11 @@ function resolveTheme(theme: DeviceSettings['theme']) {
 
 export function NavbarDemo({
 	initialApp = 'community',
+	notifications = NAV_NOTIFICATIONS,
 	user,
 }: {
 	readonly initialApp?: string;
+	readonly notifications?: readonly NavNotification[];
 	readonly user: NavUser | null;
 }) {
 	const [currentApp, setCurrentApp] = useState(initialApp);
@@ -47,7 +49,7 @@ export function NavbarDemo({
 					<NavbarCrumb />
 					<AppSelector apps={NAV_APPS} currentAppId={currentApp} onSelect={setCurrentApp} />
 					<NavbarSpacer />
-					{user ? <NavbarNotifications allHref="#" notifications={NAV_NOTIFICATIONS} /> : null}
+					{user ? <NavbarNotifications allHref="#" notifications={notifications} /> : null}
 					<NavbarVisitor
 						accountSettingsHref="#"
 						appLinks={user ? VISITOR_APP_LINKS[currentApp] : undefined}
