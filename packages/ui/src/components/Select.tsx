@@ -25,8 +25,12 @@ const selectTriggerStyles = cva({
 const selectItemStyles = cva({
 	base: [
 		'text-text flex cursor-pointer items-center justify-between gap-2.5 rounded-[7px] px-2.5 py-1.5 font-sans text-[13px] outline-0 transition-colors',
+		// unlike MenuItem, ListBoxItem doesn't move focus on hover — style hover explicitly
+		'hover:bg-accent/15 hover:text-accent-ink',
 		'focused:bg-accent/15 focused:text-accent-ink',
-		'selected:text-accent-ink selected:font-bold',
+		'selected:bg-surface-2 selected:text-accent-ink selected:font-bold',
+		// hover/keyboard highlight wins over the selected tint
+		'selected:hover:bg-accent/15 selected:focused:bg-accent/15',
 		'disabled:cursor-default disabled:opacity-45',
 	],
 });
