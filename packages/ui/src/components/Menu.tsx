@@ -34,14 +34,17 @@ export function Menu<TItem extends object>({ placement, ...props }: MenuProps<TI
 const menuItemStyles = cva({
 	base: [
 		'text-text flex cursor-pointer items-center gap-2.5 rounded-[10px] px-3 py-2 font-sans text-sm font-medium outline-0 transition-colors',
+		'hover:bg-accent/15 hover:text-accent-ink',
 		'focused:bg-accent/15 focused:text-accent-ink',
-		'selected:text-accent-ink selected:font-bold',
+		'selected:bg-surface-2 selected:text-accent-ink selected:font-bold',
+		// hover/keyboard highlight wins over the selected tint
+		'selected:hover:bg-accent/15 selected:focused:bg-accent/15',
 		'disabled:cursor-default disabled:opacity-45',
 		'[&_svg]:size-4 [&_svg]:shrink-0',
 	],
 	variants: {
 		isDestructive: {
-			true: 'text-danger focused:bg-danger/12 focused:text-danger',
+			true: 'text-danger hover:bg-danger/12 hover:text-danger focused:bg-danger/12 focused:text-danger',
 		},
 	},
 });
