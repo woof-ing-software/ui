@@ -6,8 +6,10 @@ import { cva, cx } from '../styles/cva.js';
 const segmentStyles = cva({
 	base: [
 		'flex-1 cursor-pointer rounded-[7px] border-0 bg-transparent px-2.5 py-[7px] text-center font-sans text-[12.5px] font-semibold whitespace-nowrap transition-colors',
-		'text-muted hover:text-text',
+		'text-muted hover:bg-accent/15 hover:text-accent-ink',
 		'selected:bg-surface-2 selected:text-text',
+		// hover highlight wins over the selected tint
+		'selected:hover:bg-accent/15 selected:hover:text-accent-ink',
 		'focus-visible:outline-accent focus-visible:outline-2 focus-visible:-outline-offset-2 outline-0',
 		'disabled:cursor-default disabled:opacity-45',
 	],
